@@ -33,7 +33,11 @@ android {
     }
 
     buildFeatures {
-        dataBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-alpha01"
     }
 }
 
@@ -61,6 +65,7 @@ dependencies {
     //compose
     implementation "androidx.compose.ui:ui:${compose_version}"
     implementation "androidx.compose.compiler:compiler:${compose_version}"
+    implementation "androidx.compose.runtime:runtime:${compose_version}"
     // Tooling support (Previews, etc.)
     implementation "androidx.compose.ui:ui-tooling:${compose_version}"
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
