@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 interface MunJeongApi {
     companion object {
         val api: MunJeongApi = Retrofit.Builder()
-            .baseUrl("localhost:8080")
+            .baseUrl("http://localhost:8080")
             .client(
                 OkHttpClient()
                     .newBuilder()

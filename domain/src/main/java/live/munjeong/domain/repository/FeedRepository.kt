@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import live.munjeong.domain.model.Feed
 
 interface FeedRepository {
-    suspend fun getFeeds(): Flow<List<Feed>>
+    suspend fun getFeeds(memberId: String): Flow<List<Feed>>
 }
