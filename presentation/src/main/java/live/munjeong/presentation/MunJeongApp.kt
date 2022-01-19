@@ -6,15 +6,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import live.munjeong.presentation.navigation.MunJeongNavGraph
+import live.munjeong.presentation.ui.theme.MunJeongTheme
 
 @Composable
 fun MunJeongApp() {
-    Row(
-        Modifier
-            .fillMaxSize()
-    ) {
-        MunJeongNavGraph(
-            navController = rememberNavController(),
-        )
+    MunJeongTheme {
+        Row(
+            Modifier
+                .fillMaxSize()
+        ) {
+            MunJeongNavGraph(
+                navController = rememberNavController(),
+            )
+        }
     }
 }
