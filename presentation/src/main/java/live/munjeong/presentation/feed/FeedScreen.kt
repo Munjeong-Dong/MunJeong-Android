@@ -1,7 +1,9 @@
 package live.munjeong.presentation.feed
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
+import android.widget.ListView
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -27,13 +29,19 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.whenCreated
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import live.munjeong.domain.model.Feed
 import live.munjeong.domain.model.User
 import live.munjeong.presentation.ui.theme.MunJeongTheme
 
+@SuppressLint("FlowOperatorInvokedInComposition")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FeedScreen(
@@ -42,13 +50,32 @@ fun FeedScreen(
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context: Context = LocalContext.current
-    val list by viewModel.list.collectAsState()
 
-    LazyColumn {
-        items(list) {
-            FeedContent(feed = it)
+    when (val viewState = viewModel.viewState.collectAsState(FeedListViewModel.ViewState.Loading).value) {
+        is FeedListViewModel.ViewState.Data -> {
+            FeedListContent(feedList = viewState.data)
+        }
+        is FeedListViewModel.ViewState.Error -> {
+
+        }
+        is FeedListViewModel.ViewState.Loading -> {
+
         }
     }
+}
+
+@Composable
+fun FeedListContent(feedList: List<Feed>) {
+    LazyColumn {
+        items(feedList) {
+            FeedContent(it)
+        }
+    }
+}
+
+@Composable
+fun FeedErrorContent(feedList: List<Feed>) {
+    Text(text = "aaa")
 }
 
 @Composable

@@ -3,7 +3,7 @@ package live.munjeong.domain.usecase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-abstract class UseCase<in P, R> (private val coroutineDispatcher: CoroutineDispatcher) {
+abstract class CoroutineUseCase<in P, R> (private val coroutineDispatcher: CoroutineDispatcher) {
     suspend operator fun invoke(parameters: P): Result<R> {
         return try {
             withContext(coroutineDispatcher) {
@@ -19,3 +19,4 @@ abstract class UseCase<in P, R> (private val coroutineDispatcher: CoroutineDispa
     @Throws(RuntimeException::class)
     protected abstract suspend fun execute(parameters: P): R
 }
+

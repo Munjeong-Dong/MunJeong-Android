@@ -8,7 +8,7 @@ import live.munjeong.domain.repository.FeedRepository
 import javax.inject.Inject
 
 class FeedRepositoryImpl @Inject constructor(private val api: MunJeongApi) : FeedRepository {
-    override suspend fun getFeeds(memberId: String): Flow<List<Feed>> {
+    override fun getFeeds(memberId: String): Flow<List<Feed>> {
         TODO("Not yet implemented")
     }
 }

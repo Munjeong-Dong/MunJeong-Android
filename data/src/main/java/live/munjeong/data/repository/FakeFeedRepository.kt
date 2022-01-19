@@ -10,7 +10,7 @@ import live.munjeong.domain.model.Feed
 import live.munjeong.domain.repository.FeedRepository
 
 class FakeFeedRepository : FeedRepository {
-    override suspend fun getFeeds(memberId: String): Flow<List<Feed>> {
+    override fun getFeeds(memberId: String): Flow<List<Feed>> {
         return flowOf(getFakeFeedList().map { it.toDomainModel() })
     }
 
